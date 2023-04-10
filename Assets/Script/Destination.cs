@@ -15,7 +15,7 @@ public class Destination : MonoBehaviour
         GameObject NewSoundObject = Instantiate(SoundObject);
         NewSoundObject.transform.position = transform.position;
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
 
         StartCoroutine(GenerateSoundObject());
     }

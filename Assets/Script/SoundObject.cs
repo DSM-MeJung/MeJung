@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,19 +25,27 @@ public class SoundObject : MonoBehaviour
 
     void Move()
     {
-        if (Vector3.Distance(destination, target.position) > 1.0f)
+        if (Vector3.Distance(destination, target.position) > 0.5f)
         {
             destination = target.position;
             agent.destination = destination;
         }
-        else
+        else if(!audioSource.isPlaying && agent.velocity.sqrMagnitude >= 0.2f * 0.2f && agent.remainingDistance <= 5f)
         {
+            target = gameObject.transform;
             PlaySound();
         }
     }
 
     void  PlaySound()
     {
+        audioSource.Play();
+        StartCoroutine(DestroySelf());
+    }
 
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }
