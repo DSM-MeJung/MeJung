@@ -43,4 +43,16 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.S)) transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
         if(Input.GetKey(KeyCode.W)) transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
+    
+    // private void Move()
+    // {
+    //     float horizontal = Input.GetAxis("Horizontal");
+    //     float vertical = Input.GetAxis("Vertical");
+    //     
+    //     Vector3 moveDir = new Vector3(-vertical, 0, horizontal);
+    //     
+    //     moveDir *= moveSpeed;
+    //
+    //     characterController.Move(moveDir * Time.deltaTime);
+    // }
 }
