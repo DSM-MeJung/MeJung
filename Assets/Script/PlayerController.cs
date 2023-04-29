@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     
     [SerializeField] private float moveSpeed;
+    private float gravity = 20f;
     [SerializeField] private float rotateSpeed = 500.0f;
     private float xRotate, yRotate, xRotateMove, yRotateMove;
     
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(inputX, 0, inputZ);
         moveDir = transform.TransformDirection(moveDir);
         moveDir *= moveSpeed * Time.deltaTime;
+        moveDir.y -= gravity * Time.deltaTime;
         characterController.Move(moveDir);
     }
 }
