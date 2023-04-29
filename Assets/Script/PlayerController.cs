@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;   
-        //characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -36,12 +36,26 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = new Vector3(xRotate, yRotate, 0);
         }
 
+       /* Move use transform
+
+       private void Move()
+       {
+           if(Input.GetKey(KeyCode.A)) transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+           if(Input.GetKey(KeyCode.D)) transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+           if(Input.GetKey(KeyCode.S)) transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+           if(Input.GetKey(KeyCode.W)) transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+       }
+       */
+
+
     private void Move()
     {
-        if(Input.GetKey(KeyCode.A)) transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-        if(Input.GetKey(KeyCode.D)) transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        if(Input.GetKey(KeyCode.S)) transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-        if(Input.GetKey(KeyCode.W)) transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
+        Vector3 moveDir = new Vector3(inputX, 0, inputZ);
+        moveDir = transform.TransformDirection(moveDir);
+        moveDir *= moveSpeed * Time.deltaTime;
+        characterController.Move(moveDir);
     }
     
     // private void Move()
