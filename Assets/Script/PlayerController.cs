@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEditor;
 using UnityEngine;
+using UniRx.Triggers;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float yRotateMove;
     private Vector2 inputPos;
     [SerializeField]private Animator animator;
+    
     enum animState
     {
         right = 1,
@@ -28,9 +31,11 @@ public class PlayerController : MonoBehaviour
         meleeAttack,
         torchAttack
     }
-    
+
+
     private void Start()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;   
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -42,6 +47,7 @@ public class PlayerController : MonoBehaviour
         CameraMove();
         State();
     }
+
 
 
     private void CameraMove()
@@ -83,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void State()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) )
         {
             animator.SetInteger("AnimationState", (int)animState.meleeAttack);
         }
