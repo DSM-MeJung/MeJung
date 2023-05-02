@@ -27,7 +27,6 @@ public class ZombieAI : MonoBehaviour
 
     private void Update()
     {
-
         if (player != null)
         {
             float distance = Vector3.Distance(transform.position, player.position);
