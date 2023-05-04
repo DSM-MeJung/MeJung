@@ -6,47 +6,39 @@ using UnityEngine.AI;
 
 public class ZombieAI : MonoBehaviour
 {
+    public enum State
+    {
+        Idle,
+        Trace,
+        Attack,
+        Dead
+    };
+
+    public State curState;
+    
     public Transform player;
     private NavMeshAgent agent;
     private Animator animator;
 
     public float health;
 
-    private bool isWalk;
-    private bool isDead;
-    private bool canAttack = true;
-
+    public bool canAttack;
     public float attackTime;
     public float attackRange;
+
+    public bool isDead;
     
-    private void Awake()
+    private void Start()
     {
+        player = FindObjectOfType<PlayerController>().transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        StartCoroutine(CheckState());
     }
 
     private void Update()
     {
-        if (player != null)
-        {
-            float distance = Vector3.Distance(transform.position, player.position);
-            if (distance <= attackRange)
-            {
-                if (canAttack)
-                {
-                    StartCoroutine(Attack());
-                }
-                else
-                {
-                    animator.SetBool("isWalk", false);
-                }
-            }
-            else
-            {
-                agent.SetDestination(player.position);
-                animator.SetBool("isWalk", true);
-            }
-        }
         Rotate();
     }
 
@@ -57,6 +49,51 @@ public class ZombieAI : MonoBehaviour
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
+
+    private void Move()
+    {
+        agent.SetDestination(player.position);
+        animator.SetBool("isWalk", true);
+    }
+
+    private IEnumerator CheckState()
+    {
+        while (!isDead)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            float distance = Vector3.Distance(player.position, transform.position);
+
+            if (distance <= attackRange)
+            {
+                curState = State.Attack;
+            }
+            else
+            {
+                curState = State.Trace;
+            }
+        }
+    }
+
+    private IEnumerator ChangeStateAction()
+    {
+        while (!isDead)
+        {
+            switch (curState)
+            {
+                case State.Trace:
+                    agent.SetDestination(player.position);
+                    break;
+                case State.Attack:
+                    if (canAttack)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                    break;
+                case
+            }
         }
     }
 
