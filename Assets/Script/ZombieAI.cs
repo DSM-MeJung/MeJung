@@ -35,11 +35,18 @@ public class ZombieAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         StartCoroutine(CheckState());
+        StartCoroutine(ChangeStateAction());
     }
 
     private void Update()
     {
         Rotate();
+
+        if (!canAttack)
+        {
+            Move();
+        }
+        animator.SetInteger("State", (int)curState);
     }
 
     private void Rotate()
@@ -55,7 +62,6 @@ public class ZombieAI : MonoBehaviour
     private void Move()
     {
         agent.SetDestination(player.position);
-        animator.SetBool("isWalk", true);
     }
 
     private IEnumerator CheckState()
@@ -91,9 +97,11 @@ public class ZombieAI : MonoBehaviour
                     {
                         StartCoroutine(Attack());
                     }
+
                     break;
-                case
             }
+
+            yield return null;
         }
     }
 
