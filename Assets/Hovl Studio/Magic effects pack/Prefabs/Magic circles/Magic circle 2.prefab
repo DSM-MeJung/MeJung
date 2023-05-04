@@ -14649,9 +14649,10 @@ GameObject:
   - component: {fileID: 3423388300971593625}
   - component: {fileID: 1601506141239540749}
   - component: {fileID: 5574110145886096913}
+  - component: {fileID: 2984483136545220791}
   m_Layer: 0
   m_Name: Magic circle 2
-  m_TagString: Untagged
+  m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19512,6 +19513,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2984483136545220791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377181292992421420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ea3ec52a8ca184091217d7fc22df70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster:
+  - {fileID: 4558290420350082183, guid: 63fe0d228c0e6214cbd93f97298e4435, type: 3}
+  - {fileID: 3150489250649455398, guid: 6ce2140c10b53b3488ce60d59d77f054, type: 3}
 --- !u!1 &8598798586939600705
 GameObject:
   m_ObjectHideFlags: 0

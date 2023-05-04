@@ -5,6 +5,7 @@ using UniRx;
 using UnityEditor;
 using UnityEngine;
 using UniRx.Triggers;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private float yRotateMove;
     private Vector2 inputPos;
     [SerializeField]private Animator animator;
+
+    [Space] [Header("HP")]
+    [SerializeField] private int hp;
+    [SerializeField]   private Slider hpSlider;
     
     enum animState
     {
@@ -35,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        
+        hpSlider.value = hp;
         Cursor.lockState = CursorLockMode.Locked;   
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -46,9 +51,17 @@ public class PlayerController : MonoBehaviour
         Move();
         CameraMove();
         State();
+        if (Input.GetKeyDown(KeyCode.P))
+            Damage(5);
     }
 
-
+    void Damage(int value)
+    {
+        hp-=value;
+        if(hp <= 0)
+            Debug.Log("Die!");
+        hpSlider.value = hp;
+    }
 
     private void CameraMove()
     {
