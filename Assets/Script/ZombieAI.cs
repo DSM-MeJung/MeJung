@@ -6,47 +6,40 @@ using UnityEngine.AI;
 
 public class ZombieAI : MonoBehaviour
 {
+    public enum State
+    {
+        Idle,
+        Trace,
+        Attack,
+        Dead
+    };
+
+    public State curState;
+    
     public Transform player;
     private NavMeshAgent agent;
     private Animator animator;
 
     public float health;
 
-    private bool isWalk;
-    private bool isDead;
-    private bool canAttack = true;
-
+    public bool canAttack;
     public float attackTime;
     public float attackRange;
+
+    public bool isDead;
     
-    private void Awake()
+    private void Start()
     {
+        player = FindObjectOfType<PlayerController>().transform;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        StartCoroutine(CheckState());
+        StartCoroutine(ChangeStateAction());
     }
 
     private void Update()
     {
-        if (player != null)
-        {
-            float distance = Vector3.Distance(transform.position, player.position);
-            if (distance <= attackRange)
-            {
-                if (canAttack)
-                {
-                    StartCoroutine(Attack());
-                }
-                else
-                {
-                    animator.SetBool("isWalk", false);
-                }
-            }
-            else
-            {
-                agent.SetDestination(player.position);
-                animator.SetBool("isWalk", true);
-            }
-        }
         Rotate();
     }
 
@@ -60,17 +53,60 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
+    private void Move()
+    {
+        agent.SetDestination(player.position);
+        
+    }
+
+    private IEnumerator CheckState()
+    {
+        while (!isDead)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            float distance = Vector3.Distance(player.position, transform.position);
+
+            if (distance <= attackRange)
+            {
+                curState = State.Attack;
+            }
+            else
+            {
+                curState = State.Trace;
+            }
+        }
+    }
+
+    private IEnumerator ChangeStateAction()
+    {
+        while (!isDead)
+        {
+            switch (curState)
+            {
+                case State.Trace:
+                    agent.SetDestination(player.position);
+                    animator.SetInteger("State", (int)curState);
+                    break;
+                case State.Attack:
+                    if (canAttack)
+                    {
+                        StartCoroutine(Attack());
+                        animator.SetInteger("State", (int)curState);
+                    }
+                    break;
+            }
+
+            yield return null;
+        }
+    }
+
     private IEnumerator Attack()
     {
         Debug.Log("Attack");
         canAttack = false;
-        agent.ResetPath();
-        animator.SetBool("canAttack", true);
-        animator.SetBool("isWalk", false);
-        
+
         yield return new WaitForSeconds(attackTime);
-        
-        animator.SetBool("canAttack", false);
         canAttack = true;
     }
 }
