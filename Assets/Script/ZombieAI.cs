@@ -56,30 +56,30 @@ public class ZombieAI : MonoBehaviour
     private void Move()
     {
         agent.SetDestination(player.position);
-        
     }
 
     private IEnumerator CheckState()
     {
         while (!isDead)
         {
-            yield return new WaitForSeconds(0.2f);
-
             float distance = Vector3.Distance(player.position, transform.position);
 
             if (distance <= attackRange)
             {
                 curState = State.Attack;
+                yield return new WaitForSeconds(4f);
             }
             else
             {
                 curState = State.Trace;
+                yield return new WaitForSeconds(1.4f);
             }
         }
     }
 
     private IEnumerator ChangeStateAction()
     {
+        float waitTime;
         while (!isDead)
         {
             switch (curState)
