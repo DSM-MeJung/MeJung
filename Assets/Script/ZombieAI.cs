@@ -27,6 +27,8 @@ public class ZombieAI : MonoBehaviour
     public float attackRange;
 
     public bool isDead;
+
+    [SerializeField] private GameObject[] armCollider;
     
     private void Start()
     {
@@ -51,6 +53,17 @@ public class ZombieAI : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
+    }
+
+    public void AttackStart()
+    {
+        armCollider[0].SetActive(true);
+        armCollider[1].SetActive(true);
+    }
+    public void AttackDone()
+    {
+        armCollider[0].SetActive(false);
+        armCollider[1].SetActive(false);
     }
 
     private void Move()
@@ -108,5 +121,29 @@ public class ZombieAI : MonoBehaviour
 
         yield return new WaitForSeconds(attackTime);
         canAttack = true;
+    }
+
+    private void Damage(int value)
+    {
+        health -= value;
+        if (health < 0)
+        {
+            Die();
+        }
+        
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Weapon"))
+            Damage(10);
+        if(other.CompareTag("Torch"))
+            Damage(5);
+            
     }
 }

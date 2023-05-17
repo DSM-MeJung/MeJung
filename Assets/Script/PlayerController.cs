@@ -5,6 +5,7 @@ using UniRx;
 using UnityEditor;
 using UnityEngine;
 using UniRx.Triggers;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
     [Space] [Header("HP")]
     [SerializeField] private int hp;
     [SerializeField]   private Slider hpSlider;
+
+    [SerializeField] private GameObject meleeBox;
+    [SerializeField] private GameObject torchBox;
     
     enum animState
     {
@@ -130,6 +134,40 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetInteger("AnimationState", (int)animState.idle);
         }
-        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Portal"))
+        {
+            SceneManager.LoadScene("GameEnd");
+        }
+
+        if (other.CompareTag("Monster"))
+        {
+            switch (other.name)
+            {
+                case "Swamp":
+                    Damage(5);
+                    break;
+            }
+        }
+    }
+
+    public void StartMeleeAttack()
+    {
+        meleeBox.SetActive(true);
+    }
+    public void DoneMeleeAttack()
+    {
+        meleeBox.SetActive(false);
+    }
+    public void StartTorchAttack()
+    {
+        torchBox.SetActive(true);
+    }
+    public void DoneTorchAttack()
+    {
+        torchBox.SetActive(false);
     }
 }

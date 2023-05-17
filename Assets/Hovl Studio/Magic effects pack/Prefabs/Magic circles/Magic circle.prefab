@@ -19528,6 +19528,7 @@ GameObject:
   - component: {fileID: 3650638188812647480}
   - component: {fileID: 797784518864179116}
   - component: {fileID: 5796355061092580784}
+  - component: {fileID: 4926668906346113762}
   m_Layer: 0
   m_Name: Magic circle
   m_TagString: Portal
@@ -24392,6 +24393,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!65 &4926668906346113762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744133877081091469}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.58, y: 1.59, z: 2.58}
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!1 &7673830656541891808
 GameObject:
   m_ObjectHideFlags: 0
