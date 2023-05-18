@@ -145,10 +145,14 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Monster"))
         {
+            Debug.Log(other.name);
             switch (other.name)
             {
                 case "Swamp":
                     Damage(5);
+                    break;
+                case "Zombie":
+                    Damage(10);
                     break;
             }
         }

@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 3711851394899468754}
   - component: {fileID: 3711851394899468764}
   m_Layer: 3
-  m_Name: Zombie Idle
+  m_Name: Zombie
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

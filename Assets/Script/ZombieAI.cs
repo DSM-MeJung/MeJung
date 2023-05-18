@@ -26,6 +26,9 @@ public class ZombieAI : MonoBehaviour
     public float attackTime;
     public float attackRange;
 
+    public float attackAnimationTime;
+    public float walkAnimationTime;
+    
     public bool isDead;
 
     [SerializeField] private GameObject[] armCollider;
@@ -80,12 +83,12 @@ public class ZombieAI : MonoBehaviour
             if (distance <= attackRange)
             {
                 curState = State.Attack;
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(attackAnimationTime);
             }
             else
             {
                 curState = State.Trace;
-                yield return new WaitForSeconds(1.4f);
+                yield return new WaitForSeconds(walkAnimationTime);
             }
         }
     }
