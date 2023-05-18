@@ -32,6 +32,7 @@ public class ZombieAI : MonoBehaviour
     public bool isDead;
 
     [SerializeField] private GameObject[] armCollider;
+    [SerializeField] private GameObject zombieArm;
     
     private void Start()
     {
@@ -62,6 +63,16 @@ public class ZombieAI : MonoBehaviour
     {
         armCollider[0].SetActive(true);
         armCollider[1].SetActive(true);
+    }
+
+  
+    public void ZombieAttackStart()
+    {
+        zombieArm.SetActive(true);
+    }
+    public void ZombieAttackDone()
+    {
+        zombieArm.SetActive(false);
     }
     public void AttackDone()
     {
