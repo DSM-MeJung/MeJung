@@ -140,10 +140,17 @@ public class ZombieAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Weapon"))
+        if (other.CompareTag("Weapon"))
+        {
+            Debug.Log("진입");
             Damage(10);
-        if(other.CompareTag("Torch"))
+        }
+
+        if (other.CompareTag("Torch"))
+        {
+            Debug.Log("진입");
             Damage(5);
+        }
             
     }
 }
