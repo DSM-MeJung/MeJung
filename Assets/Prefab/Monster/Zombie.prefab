@@ -59,7 +59,8 @@ Transform:
   m_LocalPosition: {x: 0.029806063, y: 0.124010496, z: -0.01285011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5146016629943934094}
   m_Father: {fileID: 8448288920028801684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -686,7 +687,7 @@ GameObject:
   - component: {fileID: 3711851394899468754}
   - component: {fileID: 3711851394899468764}
   m_Layer: 3
-  m_Name: Zombie Idle
+  m_Name: Zombie
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,9 +718,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4558290420350082183}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Mass: 200
+  m_Drag: 3
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -771,10 +772,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6356eab771ae49949a2a89275430755d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curState: 0
   player: {fileID: 0}
   health: 100
+  canAttack: 1
   attackTime: 1
   attackRange: 1
+  attackAnimationTime: 0
+  walkAnimationTime: 0
+  isDead: 0
+  armCollider: []
+  zombieArm: {fileID: 7276717958141264184}
 --- !u!195 &3711851394899468764
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1083,6 +1091,51 @@ Transform:
   m_Father: {fileID: 2016091536251844478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7276717958141264184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5146016629943934094}
+  - component: {fileID: 4356608315408539742}
+  m_Layer: 3
+  m_Name: Zombie
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5146016629943934094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276717958141264184}
+  m_LocalRotation: {x: -0.07302848, y: -0.019511275, z: 0.00604203, w: 0.9971207}
+  m_LocalPosition: {x: 0.0039998516, y: -0.2099998, z: 0.042999975}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6741586449141923851}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -8.36, y: -2.305, z: 0.863}
+--- !u!65 &4356608315408539742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276717958141264184}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.39, z: 0.04}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7397694471058117981
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,9 +26,13 @@ public class ZombieAI : MonoBehaviour
     public float attackTime;
     public float attackRange;
 
+    public float attackAnimationTime;
+    public float walkAnimationTime;
+    
     public bool isDead;
 
     [SerializeField] private GameObject[] armCollider;
+    [SerializeField] private GameObject zombieArm;
     
     private void Start()
     {
@@ -60,6 +64,16 @@ public class ZombieAI : MonoBehaviour
         armCollider[0].SetActive(true);
         armCollider[1].SetActive(true);
     }
+
+  
+    public void ZombieAttackStart()
+    {
+        zombieArm.SetActive(true);
+    }
+    public void ZombieAttackDone()
+    {
+        zombieArm.SetActive(false);
+    }
     public void AttackDone()
     {
         armCollider[0].SetActive(false);
@@ -80,12 +94,12 @@ public class ZombieAI : MonoBehaviour
             if (distance <= attackRange)
             {
                 curState = State.Attack;
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(attackAnimationTime);
             }
             else
             {
                 curState = State.Trace;
-                yield return new WaitForSeconds(1.4f);
+                yield return new WaitForSeconds(walkAnimationTime);
             }
         }
     }
@@ -140,10 +154,17 @@ public class ZombieAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Weapon"))
+        if (other.CompareTag("Weapon"))
+        {
+            Debug.Log("진입");
             Damage(10);
-        if(other.CompareTag("Torch"))
+        }
+
+        if (other.CompareTag("Torch"))
+        {
+            Debug.Log("진입");
             Damage(5);
+        }
             
     }
 }
