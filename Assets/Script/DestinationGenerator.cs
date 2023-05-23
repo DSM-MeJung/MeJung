@@ -14,7 +14,7 @@ public class DestinationGenerator : MonoBehaviour
     void Start()
     {
         // Generate the initial destination
-        GenerateDestination();
+            GenerateDestination();
 
         // Generate additional destinations until we have enough
         while (destinationsGenerated < numberOfDestinations)

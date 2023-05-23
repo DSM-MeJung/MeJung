@@ -57,7 +57,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.25590426
+      - time: 0.32414573
         functionName: ZombieAttackStart
         data: 
         objectReferenceParameter: {instanceID: 0}

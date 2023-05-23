@@ -30,6 +30,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject meleeBox;
     [SerializeField] private GameObject torchBox;
     
+    [Space]
+    [Header("Sound")]
+    [SerializeField] private AudioSource walkAudioSource;
+    [SerializeField] private AudioSource slashAudioSource;
+    [SerializeField] private AudioSource damagedAudioSource;
+    [SerializeField] private AudioSource torchAudioSource;
+
     enum animState
     {
         right = 1,
@@ -62,8 +69,10 @@ public class PlayerController : MonoBehaviour
     void Damage(int value)
     {
         hp-=value;
-        if(hp <= 0)
-            Debug.Log("Die!");
+        if(!damagedAudioSource.isPlaying)
+            damagedAudioSource.Play();
+        if (hp <= 0)
+            SceneManager.LoadScene("GameEnd");
         hpSlider.value = hp;
     }
 
@@ -134,6 +143,18 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetInteger("AnimationState", (int)animState.idle);
         }
+
+        if (inputPos.x != 0 || inputPos.y != 0)
+        {
+            if (!walkAudioSource.isPlaying)
+            {
+                walkAudioSource.Play();
+            }
+        }
+        else
+        {
+            walkAudioSource.Stop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -161,6 +182,7 @@ public class PlayerController : MonoBehaviour
     public void StartMeleeAttack()
     {
         meleeBox.SetActive(true);
+        slashAudioSource.Play();
     }
     public void DoneMeleeAttack()
     {
@@ -168,6 +190,7 @@ public class PlayerController : MonoBehaviour
     }
     public void StartTorchAttack()
     {
+        torchAudioSource.Play();
         torchBox.SetActive(true);
     }
     public void DoneTorchAttack()

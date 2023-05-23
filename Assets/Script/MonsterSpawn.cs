@@ -15,8 +15,8 @@ public class MonsterSpawn : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(Random.Range(3.5f, 10f));
-        if (Random.Range(0f, 10f) > 7)
+        yield return new WaitForSeconds(Random.Range(8f, 20f));
+        if (Random.Range(0f, 10f) > 9)
         {
             Instantiate(monster[Random.Range(0, monster.Length)],
                 new Vector3(transform.position.x, transform.position.y + 2), Quaternion.identity); 
