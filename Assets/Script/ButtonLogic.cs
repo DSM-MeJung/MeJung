@@ -17,9 +17,14 @@ public class ButtonLogic : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
+    
     public void Quit()
     {
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 
     public void StartGame()
