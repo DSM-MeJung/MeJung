@@ -783,6 +783,11 @@ MonoBehaviour:
   isDead: 0
   armCollider: []
   zombieArm: {fileID: 7276717958141264184}
+  skinnedMesh: {fileID: 8016484381073323367}
+  skinnedMeshMaterial: {fileID: 0}
+  dieMaterial: {fileID: 2100000, guid: aa78e42abb191c1478663e3c8e0a14bf, type: 2}
+  dissolveRate: 0.0125
+  refreshRate: 0.0125
 --- !u!195 &3711851394899468764
 NavMeshAgent:
   m_ObjectHideFlags: 0

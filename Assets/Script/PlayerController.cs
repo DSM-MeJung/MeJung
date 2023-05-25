@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Portal"))
         {
-            SceneManager.LoadScene("GameEnd");
+            SceneManager.LoadScene("GameClear");
         }
 
         if (other.CompareTag("Monster"))

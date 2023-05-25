@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class ZombieAI : MonoBehaviour
 {
@@ -33,7 +34,12 @@ public class ZombieAI : MonoBehaviour
 
     [SerializeField] private GameObject[] armCollider;
     [SerializeField] private GameObject zombieArm;
-    
+
+    public SkinnedMeshRenderer skinnedMesh;
+    [SerializeField]private Material skinnedMeshMaterial;
+    [SerializeField]private Material dieMaterial;
+    public float dissolveRate = 0.0125f;
+    public float refreshRate = 0.0125f;
     private void Start()
     {
         player = FindObjectOfType<PlayerController>().transform;
@@ -149,6 +155,22 @@ public class ZombieAI : MonoBehaviour
 
     private void Die()
     {
+        skinnedMesh.material = dieMaterial;
+        if (skinnedMesh != null)
+            skinnedMeshMaterial = skinnedMesh.material;
+        StartCoroutine(Dissolve());
+    }
+
+    private IEnumerator Dissolve()
+    {  
+        float counter = 0;
+        while (skinnedMeshMaterial.GetFloat("_DissolveAmount") < 1)
+        {
+            counter += dissolveRate;
+            skinnedMeshMaterial.SetFloat("_DissolveAmount", counter);
+            yield return new WaitForSeconds(refreshRate);
+        }
+        canAttack = false;
         Destroy(gameObject);
     }
 
@@ -156,13 +178,11 @@ public class ZombieAI : MonoBehaviour
     {
         if (other.CompareTag("Weapon"))
         {
-            Debug.Log("진입");
             Damage(10);
         }
 
         if (other.CompareTag("Torch"))
         {
-            Debug.Log("진입");
             Damage(5);
         }
             
