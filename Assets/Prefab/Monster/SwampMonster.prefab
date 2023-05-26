@@ -536,8 +536,8 @@ MonoBehaviour:
   canAttack: 1
   attackTime: 1
   attackRange: 0.8
-  attackAnimationTime: 0
-  walkAnimationTime: 0
+  attackAnimationTime: 4.6
+  walkAnimationTime: 1.4
   isDead: 0
   armCollider:
   - {fileID: 3851161545112695375}

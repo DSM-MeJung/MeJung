@@ -778,8 +778,8 @@ MonoBehaviour:
   canAttack: 1
   attackTime: 1
   attackRange: 1
-  attackAnimationTime: 0
-  walkAnimationTime: 0
+  attackAnimationTime: 2.6
+  walkAnimationTime: 1.5
   isDead: 0
   armCollider: []
   zombieArm: {fileID: 7276717958141264184}
